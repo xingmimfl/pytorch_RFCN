@@ -181,10 +181,10 @@ class FasterRCNN(nn.Module):
                                         spatial_scale= 1/32.0, group_size=self.k, 
                                         output_dim=self.n_classes)
         self.psroipooling_loc = PSRoIPool(pooled_height=self.k, pooled_width=self.k,
-                                        spatial_scale= 1/32.0,   group_size=7,
+                                        spatial_scale= 1/32.0,   group_size=self.k,
                                         output_dim= 2 * 4) #----class-agnostic
 
-        self.pooling = nn.AvgPool2d(kernel_size=7, stride=7)
+        self.pooling = nn.AvgPool2d(kernel_size=self.k, stride=self.k)
         # loss
         self.cross_entropy = None
         self.loss_box = None
